@@ -3,6 +3,15 @@
 
 > ## [深入浅出Node.js](http://tw93.com/2015-03-01/shen-ru-qian-chu-nodejs-reading-mind-map.html)
 
+> ls：查看当前路径下面的文件和文件夹。<br>
+> pwd：查看当前所在路径。<br>
+> cd Desktop：切换到桌面。<br>
+> mkdir nodejs入门：在当前路径下面创建nodejs入门文件夹。<br>
+> cd nodejs入门：进入nodejs入门文件夹。<br>
+> vi helloworld.js：创建一个helloworld.js文件，并在文件里面输入console.log("Hello World!"),保存并退出。<br>
+> cat helloworld.js：查看helloworld.js文件内容。<br>
+> node helloworld.js：在当前路径下面执行helloworld.js文件。<br>
+
 学习Node要知道模块的概念
 ## 模块
 > 编写稍大一点的程序时一般都会将代码模块化。在NodeJS中，一般将代码合理拆分到不同的JS<br>
