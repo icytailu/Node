@@ -100,3 +100,65 @@ app.get('/test',function(req,res){
 });
 app.listen(9527);
 ```
+
+## 路由
+
+- 当用`get`请求访问一个网址的时候，做什么事情：
+
+```js
+app.get('/url',function(req,res){
+    //do more
+});
+```
+
+- 当用`post`访问一个网址的时候，做什么事情
+
+```js
+app.post('/url',function(req,res){
+    //do more
+});
+```
+
+- 如果想处理这个网址的任何`method`的请求，那么写`all`
+
+```js
+app.all("/",function(){
+    // do more
+});
+```
+
+- 网址不区分大小写：`/AAb`和`/aaB`是同一个地址
+
+- 所有的GET参数，? 后面的都已经被忽略。 锚点#也被忽略
+
+你路由到`/user` ， 实际/user?id=2&sex=nboy 也能被处理。
+
+- 参数
+
+```js
+app.get('/student/:id',function(req,res){
+    var id = req.params.id;
+    var reg = /^[\d]{6}$/; //验证学号
+    if(reg.test(id)){
+        res.send('学号为：'+id);
+    }else{
+        res.send('格式错了~~~');
+    }
+})
+```
+
+- 表单可以自己提交到自己上。
+
+```js
+app.get("/form",function(req,res){
+    res.render("form");
+});
+app.post("/form",function(req,res){
+    //将数据添加进入数据库
+    res.send("成功");
+});
+```
+
+## 中间件（Middleware）
+
+**中间件**是一个函数，它可以访问请求对象（req），响应对象（res），和web应用中处于**请求-响应** 循环流程中的中间件，一般命名为`next`的变量
