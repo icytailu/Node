@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background-color: aqua;
+        }
+        button {
+            border: none;
+            outline: none;
+            width: 200px;
+            text-align: center;
+            background-color: #ddd;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>    <a href="/test">测试页面</a> </h1>
+    <div class="box"></div>
+    <button>sayHello</button>
+    <script>
+        var btn = document.querySelector('button');
+        btn.addEventListener('click',function(){
+            alert("hello")
+        })
+    </script>
+</body>
+</html>
