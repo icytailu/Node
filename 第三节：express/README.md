@@ -276,3 +276,28 @@ app.get('/',function(req,res){
     res.render('home');
 });
 ```
+
+### GET和POST请求
+
+GET请求的参数在URL中，在原生Node中，需要使用url模块来识别参数字符串。在Express中，不需要使用url模块。可以直接使用`req.query`对象。
+
+```js
+app.get('/',function(req,res){
+    console.log(req.query)
+    res.send("<h1>小样~</h1>");
+});
+// http://localhost:8080/?id=2&sex=nan
+
+//控制台输出：
+{ id: '2', sex: 'nan'}
+
+// GET /shoes?order=adidas&shoe[color]=blue&shoe[type]=converse
+req.query.order
+// => "adidas"
+
+req.query.shoe.color
+// => "blue"
+
+req.query.shoe.type
+// => "converse"
+```

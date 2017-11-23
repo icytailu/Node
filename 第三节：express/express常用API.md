@@ -35,6 +35,31 @@ app.get('/user/:id',function(req,res){
 // 您的用户ID为：9527
 ```
 
+### req.query
+
+一个在路由中包含每个查询字符串参数的对象，如果没有查询的字符串就是一个空对象。
+
+```js
+app.get('/',function(req,res){
+    console.log(req.query)
+    res.send("<h1>小样~</h1>");
+});
+// http://localhost:8080/?id=2&sex=nan
+
+//控制台输出：
+{ id: '2', sex: 'nan'}
+
+// GET /shoes?order=adidas&shoe[color]=blue&shoe[type]=converse
+req.query.order
+// => "adidas"
+
+req.query.shoe.color
+// => "blue"
+
+req.query.shoe.type
+// => "converse"
+```
+
 ## Response
 
 `res`对象表示一个Express应用程序收到`HTTP`请求时发送的**HTTP响应**。
