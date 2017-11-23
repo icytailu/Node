@@ -162,3 +162,88 @@ app.post("/form",function(req,res){
 ## 中间件（Middleware）
 
 **中间件**是一个函数，它可以访问请求对象（req），响应对象（res），和web应用中处于**请求-响应** 循环流程中的中间件，一般命名为`next`的变量
+
+中间件功能：
+
+- 执行任何代码
+- 修改请求和相应代码
+- 终结请求-相应循环
+- 调用堆栈中的下一个中间件
+
+如果当前中间件没有终结请求-响应循环，则必须调用 `next()` 方法将控制权交给下一个中间件，否则请求就会挂起。
+
+简单来说：如果我们的get、post回调函数中，没有next参数，那么匹配上第一个路由时，就不会继续往下匹配了，如果想往下匹配的话，就需要写`next()`
+
+```js
+app.get('/',function(req,res,next){
+    console.log('1');
+    next()
+});
+
+app.get('/',function(req,res){
+    console.log('2');
+});
+```
+
+再举个栗子：
+
+```js
+app.get('/:username/:id',function(req,res){
+    console.log('用户信息'+req.params.username);
+});
+
+app.get('admin/login',function(req,res){
+    console.log('管理员登录');
+});
+```
+
+上面的栗子只会输出第一个`send`第二个无效,解决方法：要么更改顺序，要么加上`next`
+
+```js
+app.get('/:user/:id',function(req,res,next){
+    // 检索数据库，如果username不存在，那么next()
+    if("检索数据库"){
+        res.send('用户信息')
+    }else{
+        next();
+    }
+});
+app.get('/admin/login',function(req,res){
+    res.send('登陆');
+});
+
+//判断也可以
+app.get('/:user/:id',function(req,res,next){
+    if(req.params.user!='admin' && req.params.id!='login'){
+        res.send("用户信息为："+ req.params.user+" ID为："+req.params.id);
+    }else{
+        next();
+    }
+});
+app.get('/admin/login',function(req,res){
+    res.send("登陆");
+});
+```
+
+Express应用所使用以下中间件：
+
+- 应用级中间件
+- 路由级中间件
+- 错误处理中间件
+- 内置中间件
+- 第三方中间件
+
+应用级中间件绑定到`app`对象使用`app.use()`和`app.METHOD()`，`METHOD` 是需要处理的 `HTTP` 请求的方法，例如 `GET`, `PUT`, `POST` 等等，全部小写。
+
+`app.use()`与get、post不同的是，他的网址不是精确匹配的。而是能够有小文件夹扩展的。
+
+举个栗子：一个网址：`http://127.0.0.1:9527/admin/home/tv`
+
+```js
+app.use('/admin',function(req,res){
+    res.writln(req.originalUrl);
+    res.writln(req.baseUrl);
+    res.writeln(req.path);
+    res.end("完毕");
+})
+```
