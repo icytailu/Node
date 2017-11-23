@@ -277,9 +277,9 @@ app.get('/',function(req,res){
 });
 ```
 
-### GET和POST请求
+### GET和POST请求的参数
 
-GET请求的参数在URL中，在原生Node中，需要使用url模块来识别参数字符串。在Express中，不需要使用url模块。可以直接使用`req.query`对象。
+`GET`请求的参数在`URL`中，在原生`Node`中，需要使用`url`模块来识别参数字符串。在`Express`中，不需要使用`url`模块。可以直接使用`req.query`对象。
 
 ```js
 app.get('/',function(req,res){
@@ -300,4 +300,33 @@ req.query.shoe.color
 
 req.query.shoe.type
 // => "converse"
+```
+
+`POST`请求在`express`中不能直接获得，必须使用`body-parser`模块。使用后，将可以用`req.body`得到。但是如果表单中含有文件上传，那么还是需要使用`formidable`模块。
+
+安装`body-parser`
+
+```js
+npm install body-parser
+```
+
+一个栗子：
+
+```js
+var express = require('express');
+var bodyParser = require('body-parser');
+var app = express();
+
+app.set('view engine','ejs');
+
+app.get('/',function(req,res){
+    res.render('form');
+});
+
+app.use(bodyParser.urlencoded({ extended:false }));
+app.post('/',function(req,res){
+    console.log(req.body);
+});
+
+app.listen(8000);
 ```
