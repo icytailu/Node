@@ -1,5 +1,24 @@
 # Express常用API
 
+## Application
+
+### app.use
+
+在匹配到一个网址的时候：后面做什么事情
+
+```js
+app.use([path,]function[,function...])
+```
+
+在路径上挂载一个中间件，如果什么都不写就代表`/`就是所有网址
+
+```js
+app.use(function(req,res,next){
+    console.log(new Date());
+    next();
+})
+```
+
 ## Request
 
 `req`对象表示`HTTP`请求，并具有请求查询字符串、参数、主体、`HTTP`头等的属性。
@@ -26,4 +45,22 @@ app.get('/user/:id',function(req,res){
 
 ```js
 res.render('index');
+```
+
+### res.status(code)
+
+```js
+res.status(404).sendFile('/absolute/path/to/404.png');
+```
+
+### res.set 设置HTTP头
+
+```js
+res.set('Content-Type','text/html;charset=utf8');
+//多个参数用对象形式
+res.set({
+  'Content-Type': 'text/plain',
+  'Content-Length': '123',
+  'ETag': '12345'
+});
 ```

@@ -51,12 +51,25 @@ const app = express();
 //     res.send("登陆");
 // });
 
-app.use('/admin',function(req,res){
-    res.set('Content-Type', 'text/plain;charset=utf8');
-    var data = "你好"
-    res.write(req.originalUrl+'\n');
-    res.write(req.baseUrl+'\n');
-    res.write(req.path+'\n');
-    res.end(data);
-})
+// app.use('/admin',function(req,res){
+//     res.set('Content-Type', 'text/plain;charset=utf8');
+//     var data = "你好"
+//     res.write(req.originalUrl+'\n');
+//     res.write(req.baseUrl+'\n');
+//     res.write(req.path+'\n');
+//     res.end(data);
+// })
+// app.use(function(req,res,next){
+//     console.log(new Date());
+//     next();
+// });
+// app.use(function(req,res){
+//     res.status(404).send("<h1>404</h1>")
+// });
+app.set('views','page')
+app.set('view engine','ejs');
+
+app.get('/',function(req,res){
+    res.render('home');
+});
 app.listen(9527);

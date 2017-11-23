@@ -237,13 +237,42 @@ Express应用所使用以下中间件：
 
 `app.use()`与get、post不同的是，他的网址不是精确匹配的。而是能够有小文件夹扩展的。
 
+**`app.use('/apple', ...)` 会 match（匹配） “`/apple`”, “`/apple/images`”, “`/apple/images/news`”, 等等...**
+
 举个栗子：一个网址：`http://127.0.0.1:9527/admin/home/tv`
 
 ```js
 app.use('/admin',function(req,res){
-    res.writln(req.originalUrl);
-    res.writln(req.baseUrl);
-    res.writeln(req.path);
-    res.end("完毕");
+    res.set('Content-Type', 'text/plain;charset=utf8');
+    var data = "你好"
+    res.write(req.originalUrl+'\n'); ///admin/home/tv
+    res.write(req.baseUrl+'\n');   ///admin
+    res.write(req.path+'\n');      ///home/tv
+    res.end(data);
 })
+
+//会自动识别err参数，如果有，那么就这个函数能捕获err
+app.use(function(req,res){
+    res.status(404).send("没有这个页面！");
+});
+```
+
+大多数情况下，渲染内容用`res.render()`将会根据`views`中的模板文件进行渲染。如果不想使用views文件夹，想自己设置文件名字，那么：
+
+```js
+app.set('views','page');
+```
+
+栗子：
+
+```js
+var express = require('express');
+var app = express();
+
+app.set('views','page')
+app.set('view engine','ejs');
+
+app.get('/',function(req,res){
+    res.render('home');
+});
 ```
