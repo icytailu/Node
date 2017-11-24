@@ -6,19 +6,19 @@
 
 ```js
 .
-|-- controller                      // 控制器
-|   |-- package.json                  // 路由入口配置文件
-|   |-- router.js                      // 路由
-|-- modulels                         // 项目模型
-|   |-- dev.env.js                  // 开发环境变量
-|-- public                         // 静态文件
-|   |-- dev.env.js                  // 开发环境变量
-|-- uploads                             // 源码目录
-|   |-- components                 // vue公共组件
-|-- views                          // 视图
-|   |-- data                        // 群聊分析得到的数据用于数据可视化
-|-- .gitignore                      // git上传需要忽略的文件格式
-|-- README.md                   // 项目说明
+|-- controller                  // 控制器
+|   |-- package.json               // 路由入口配置文件
+|   |-- router.js                   // 路由
+|-- modulels                   // 项目模型
+|   |-- file.js                      // 项目模型
+|-- public                      // 静态文件
+|-- uploads                    // 图片存放
+|-- views                      // 视图
+|   |-- album.ejs                   // 文件页面
+|   |-- err.ejs                     // 404页面
+|   |-- index.ejs                   // 主页
+|-- .gitignore                  // git上传需要忽略的文件格式
+|-- README.md               // 项目说明
 |-- app.js                     // 入口页面
-|-- package.json                   // 项目基本信息
+|-- package.json              // 项目基本信息
 ```
