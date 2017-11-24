@@ -7,7 +7,8 @@
 ```js
 .
 |-- controller                      // 控制器
-|   |-- build.js                    // 生产环境构建代码
+|   |-- package.json                  // 路由入口配置文件
+|   |-- router.js                      // 路由
 |-- modulels                         // 项目模型
 |   |-- dev.env.js                  // 开发环境变量
 |-- public                         // 静态文件
