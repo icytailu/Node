@@ -52,18 +52,62 @@ exports.getAllImagesByAlbumName = function(albumName,callback){
         if (err) return callback('没有找到文件夹~',null);
             
         var allImages = [];
-        (function iterator(i){
-            if(i == files.length){
-                callback(null,allImages);
-                return;
+
+        var x;
+        for(x=0;x<files.length;x++)
+        {
+            test(x);
+            
+        }
+
+
+        function a(){
+            var color='red';
+
+            var b=function()
+            {
+                console.log(color);
             }
-            fs.stat('./uploads/'+albumName +'/'+files[i],function(err,stats){
-                if(err) callback('找不到文件~'+files[i],null)
-                if(stats.isFile()){
-                    allImages.push(files[i]);
-                }
-                iterator(i + 1);
-            })
-        })(0)
+
+            return b;
+        }
+        
+        function c()
+        {
+            a();
+        }
+
+        c();
+
+       
+
+
+
+        function test(x , arg){
+            fs.stat('./uploads/'+albumName +'/'+files[x],function(err,stats){
+                            if(stats.isFile()){
+                                allImages.push(files[x]);
+                                if(x == files.length-1){
+                                        callback(null,allImages);
+                                        return;
+                                    }
+                            }
+                         
+                        })
+        }
+        // (function iterator(i){
+        //     if(i == files.length){
+        //         callback(null,allImages);
+        //         return;
+        //     }
+        //     fs.stat('./uploads/'+albumName +'/'+files[i],function(err,stats){
+        //         if(err) callback('找不到文件~'+files[i],null)
+        //         if(stats.isFile()){
+        //             allImages.push(files[i]);
+        //         }
+        //         iterator(i + 1);
+        //     })
+        // })(0)
+
     })
 }
