@@ -52,48 +52,20 @@ exports.getAllImagesByAlbumName = function(albumName,callback){
         if (err) return callback('没有找到文件夹~',null);
             
         var allImages = [];
-
-        var x;
-        for(x=0;x<files.length;x++)
+        for(var x=0;x<files.length;x++)
         {
-            test(x);
-            
+            test(x); 
         }
-
-
-        function a(){
-            var color='red';
-
-            var b=function()
-            {
-                console.log(color);
-            }
-
-            return b;
-        }
-        
-        function c()
-        {
-            a();
-        }
-
-        c();
-
-       
-
-
-
-        function test(x , arg){
+        function test(x){
             fs.stat('./uploads/'+albumName +'/'+files[x],function(err,stats){
-                            if(stats.isFile()){
-                                allImages.push(files[x]);
-                                if(x == files.length-1){
-                                        callback(null,allImages);
-                                        return;
-                                    }
-                            }
-                         
-                        })
+                if(stats.isFile()){
+                    allImages.push(files[x]);
+                    if(x == files.length-1){
+                        callback(null,allImages);
+                        return;
+                    }
+                }
+            })
         }
         // (function iterator(i){
         //     if(i == files.length){
@@ -108,6 +80,5 @@ exports.getAllImagesByAlbumName = function(albumName,callback){
         //         iterator(i + 1);
         //     })
         // })(0)
-
     })
 }
